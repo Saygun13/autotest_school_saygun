@@ -2,8 +2,8 @@ package main
 
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.MobileBy
-import io.appium.java_client.MobileDriver
 import io.appium.java_client.MobileElement
+import io.appium.java_client.TouchAction
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.remote.AndroidMobileCapabilityType
 import io.appium.java_client.remote.MobileCapabilityType
@@ -63,29 +63,32 @@ class BaseClass {
         editPhoneNumber = driver.findElement(MobileBy.id("ru.sportmaster.app.handh.dev:id/editTextPhone"))
         editPhoneNumber.sendKeys("9999999998")
 
-        //Запрос кода
+        //Запрос смс-кода
         lateinit var buttonSendCode: MobileElement
         buttonSendCode = driver.findElement(MobileBy.id("ru.sportmaster.app.handh.dev:id/buttonGetCode"))
         buttonSendCode.click()
 
+        //Ввод смс-кода
         lateinit var editSmsCode: MobileElement
         editSmsCode = driver.findElement(MobileBy.id("ru.sportmaster.app.handh.dev:id/pinCodeEditText"))
         editSmsCode.sendKeys("1111")
 
+        //Отказ в доступе к геолокации
         lateinit var buttonSkipGeoPerm: MobileElement
         buttonSkipGeoPerm = driver.findElement(MobileBy.id("com.android.permissioncontroller:id/permission_deny_button"))
         buttonSkipGeoPerm.click()
 
+        //Скип QSG
         lateinit var buttonSkipGeoQSG: MobileElement
         buttonSkipGeoQSG = driver.findElement(MobileBy.id("ru.sportmaster.app.handh.dev:id/viewFlipper"))
         buttonSkipGeoQSG.click()
 
+        //Выбор первого города
         lateinit var buttonCity: MobileElement
         buttonCity = driver.findElement(MobileBy.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ViewFlipper/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]"))
         buttonCity.click()
 
-
-
+        //Ожидание загрузки главного экрана
         TimeUnit.SECONDS.sleep(5)
 
     }
