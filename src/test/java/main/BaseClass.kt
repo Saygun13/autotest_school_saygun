@@ -121,9 +121,15 @@ class BaseClass {
             .perform()
 
         //Логаут
-        lateinit var buttonLogout: MobileElement
-        buttonLogout = driver.findElement(MobileBy.id("ru.sportmaster.app.handh.dev:id/buttonLogout"))
-        buttonLogout.click()
+        try {
+            lateinit var buttonLogout: MobileElement
+            buttonLogout = driver.findElement(MobileBy.id("ru.sportmaster.app.handh.dev:id/buttonLogout"))
+            buttonLogout.click()
+            println("Логаут прошел успешно")
+        } catch (e: org.openqa.selenium.NoSuchElementException) {
+            println("Кнопка логаута не найдена")
+        }
+
 
         //Ожидание результата
         TimeUnit.SECONDS.sleep(5)
