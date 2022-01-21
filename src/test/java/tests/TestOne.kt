@@ -1,16 +1,17 @@
-package Tests
+package tests
 
-import io.appium.java_client.PerformsTouchActions
-import io.appium.java_client.TouchAction
+import constructor.classes.LocatorsTypesConstructor
+import constructor.classes.locatorsTypes
+import utils.PlatformTouchAction
 import io.appium.java_client.touch.WaitOptions
 import io.appium.java_client.touch.offset.PointOption
+import locators.SplashScreenLocators
 import main.TestMethods
 import org.testng.annotations.Test
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
-class PlatformTouchAction(performsTouchActions: PerformsTouchActions) :
-    TouchAction<PlatformTouchAction>(performsTouchActions)
+
 
 class TestOne: TestMethods() {
 
@@ -20,8 +21,8 @@ class TestOne: TestMethods() {
         //Пропуск онбординга
         try {
             clickToElement(
-                "xpath",
-                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageButton"
+                locatorType = locatorsTypes.androidXPath,
+                locator = SplashScreenLocators().exitButtonOnSplashScreen.androidXPath
             )
             println("Тест прошел")
         } catch (e: org.openqa.selenium.NoSuchElementException) {
@@ -29,7 +30,11 @@ class TestOne: TestMethods() {
         }
 
         //Ввод телефонного номера
-        inputTextInField("id", "ru.sportmaster.app.handh.dev:id/editTextPhone", "9999999998")
+        inputTextInField(
+            locatorType = locatorsTypes.id,
+            locator = "ru.sportmaster.app.handh.dev:id/editTextPhone",
+            inputText = "9999999998"
+        )
 
         //Запрос смс-кода
         clickToElement("id", "ru.sportmaster.app.handh.dev:id/buttonGetCode")
@@ -60,12 +65,7 @@ class TestOne: TestMethods() {
 
         //Скролл экрана
         TimeUnit.SECONDS.sleep(3)
-        PlatformTouchAction(driver)
-            .press(PointOption.point(590, 1200))
-            .waitAction(WaitOptions.waitOptions(Duration.ofMillis(200)))
-            .moveTo(PointOption.point(590, 500))
-            .release()
-            .perform()
+        swipeOnScreen(590,1200,590,500)
 
         //Логаут
         try {
