@@ -21,16 +21,16 @@ class GetPathToApp {
     private var apkName: String? = null
     private var appName: String? = null
 
-    val fullLocalAppLocalPathIOS = "/Users/$USER_NAME/apps/Spormaster_ios/$appName"
-    val fullAppLocalPathAndroid = "/Users/$USER_NAME/apps/Spormaster_android/$apkName"
+    val fullLocalAppLocalPathIOS = "/Users/$USER_NAME/Projects/apps/Sportmaster_ios/$appName"
+    val fullAppLocalPathAndroid = "/Users/$USER_NAME/Projects/apps/Sportmaster_android/$apkName"
     val fullAppCiPathAndroid = ""
     val fullAppCiPathIOS = ""
 
     companion object {
         private val USER_NAME: String = System.getProperty("user.name")
         private val F = File("/Users/$USER_NAME/Library/Developer/Xcode/DerivedData/")
-        private val APK_PATH = File("/Users/$USER_NAME/Projects/apps/Spormaster_android/")
-        private val APP_PATH = File("/Users/$USER_NAME/Projects/apps/Spormaster_ios/")
+        private val APK_PATH = File("/Users/$USER_NAME/Projects/apps/Sportmaster_android/")
+        private val APP_PATH = File("/Users/$USER_NAME/Projects/apps/Sportmaster_ios/")
     }
 }
 
