@@ -9,6 +9,7 @@ import org.testng.annotations.AfterSuite
 import org.testng.annotations.BeforeSuite
 import java.net.URL
 import java.util.concurrent.TimeUnit
+import utils.appPath
 
 open class BaseClass {
 
@@ -29,7 +30,7 @@ open class BaseClass {
         )
         caps.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "ru.sportmaster.app.handh.dev")
         caps.setCapability(MobileCapabilityType.NO_RESET, "FALSE")
-        caps.setCapability(MobileCapabilityType.APP, "/Users/say_gun/Projects/sportmaster.apk")
+        caps.setCapability(MobileCapabilityType.APP, appPath.fullAppLocalPathAndroid)
 //        caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "")
 //        caps.setCapability(MobileCapabilityType.UDID, "")
 
