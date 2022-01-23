@@ -5,15 +5,14 @@ import constructor.classes.locatorsTypes
 import utils.PlatformTouchAction
 import io.appium.java_client.touch.WaitOptions
 import io.appium.java_client.touch.offset.PointOption
-import locators.SplashScreenLocators
+import locators.*
 import main.TestMethods
 import org.testng.annotations.Test
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 
-
-class TestOne: TestMethods() {
+class TestOne : TestMethods() {
 
     @Test
     fun testOne() {
@@ -22,7 +21,7 @@ class TestOne: TestMethods() {
         try {
             clickToElement(
                 locatorType = locatorsTypes.androidXPath,
-                locator = SplashScreenLocators().exitButtonOnSplashScreen.androidXPath
+                locator = SplashScreenLocators().skipButtonOnSplashScreen.androidXPath
             )
             println("Тест прошел")
         } catch (e: org.openqa.selenium.NoSuchElementException) {
@@ -32,44 +31,66 @@ class TestOne: TestMethods() {
         //Ввод телефонного номера
         inputTextInField(
             locatorType = locatorsTypes.id,
-            locator = "ru.sportmaster.app.handh.dev:id/editTextPhone",
+            locator = AuthScreenLocators().editPhoneNumber.androidId,
             inputText = "9999999998"
         )
 
         //Запрос смс-кода
-        clickToElement("id", "ru.sportmaster.app.handh.dev:id/buttonGetCode")
+        clickToElement(
+            locatorType = locatorsTypes.id,
+            locator = AuthScreenLocators().buttonSendCode.androidId
+        )
 
         //Ввод смс-кода
-        inputTextInField("id", "ru.sportmaster.app.handh.dev:id/pinCodeEditText", "1111")
+        inputTextInField(
+            locatorType = locatorsTypes.id,
+            locator = AuthScreenLocators().editSmsCode.androidId,
+            inputText = "1111"
+        )
 
         //Отказ в доступе к геолокации
-        clickToElement("id", "com.android.permissioncontroller:id/permission_deny_button")
+        clickToElement(
+            locatorType = locatorsTypes.id,
+            locator = PermissionDialogLocators().buttonDeny.androidId,
+        )
 
         //Скип QSG
-        clickToElement("id", "ru.sportmaster.app.handh.dev:id/viewFlipper")
+        clickToElement(
+            locatorType = locatorsTypes.id,
+            locator = CityListScreenLocators().qsgOverlay.androidId,
+        )
 
         //Выбор первого города
         clickToElement(
-            "xpath",
-            "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ViewFlipper/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]"
+            locatorType = locatorsTypes.androidXPath,
+            locator = CityListScreenLocators().firstCityElement.androidXPath,
         )
 
         //Ожидание загрузки главного экрана
         TimeUnit.SECONDS.sleep(5)
 
         //Переход в раздел Профиль
-        clickToElement("id", "ru.sportmaster.app.handh.dev:id/profile_graph")
+        clickToElement(
+            locatorType = locatorsTypes.id,
+            locator = TabbarLocators().buttonProfile.androidId,
+        )
 
         //Переход в редактирование профиля
-        clickToElement("id", "ru.sportmaster.app.handh.dev:id/buttonEditProfile")
+        clickToElement(
+            locatorType = locatorsTypes.id,
+            locator = ProfileScreenLocators().buttonProfileEdit.androidId,
+        )
 
         //Скролл экрана
         TimeUnit.SECONDS.sleep(3)
-        swipeOnScreen(590,1200,590,500)
+        swipeOnScreen(590, 1200, 590, 500)
 
         //Логаут
         try {
-            clickToElement("id", "ru.sportmaster.app.handh.dev:id/buttonLogout")
+            clickToElement(
+                locatorType = locatorsTypes.id,
+                locator = ProfileEditScreenLocators().buttonLogout.androidId,
+            )
             println("Логаут прошел успешно")
         } catch (e: org.openqa.selenium.NoSuchElementException) {
             println("Кнопка логаута не найдена")
