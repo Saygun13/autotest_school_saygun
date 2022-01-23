@@ -46,7 +46,6 @@ class TestOne : TestMethods() {
         inputTextInField(
             locatorType = locatorsTypes.id,
             locator = AuthScreenLocators().editSmsCode.androidId,
-            inputText = "1111"
             inputText = UserData().smsCode
         )
 
@@ -80,7 +79,13 @@ class TestOne : TestMethods() {
         //Переход в редактирование профиля
         clickToElement(
             locatorType = locatorsTypes.id,
-            locator = ProfileScreenLocators().buttonProfileEdit.androidId,
+            locator = ProfileScreenLocators().buttonEditProfile.androidId,
+        )
+
+        //Очистка поля Имени
+        clearField(
+            locatorType = locatorsTypes.id,
+            locator = ProfileEditScreenLocators().editFirstName.androidId
         )
 
         //Скролл экрана
@@ -88,17 +93,23 @@ class TestOne : TestMethods() {
         swipeOnScreen(590, 1200, 590, 500)
 
         //Логаут
+        clickToElement(
+            locatorType = locatorsTypes.id,
+            locator = ProfileEditScreenLocators().buttonLogout.androidId,
+        )
+
+
+        //Ожидание результата логаута. Наличие кнопки "Войти"
         try {
-            clickToElement(
+            elementIsDisplayed(
                 locatorType = locatorsTypes.id,
-                locator = ProfileEditScreenLocators().buttonLogout.androidId,
+                locator = ProfileScreenLocators().buttonSignIn.androidId
             )
             println("Логаут прошел успешно")
         } catch (e: org.openqa.selenium.NoSuchElementException) {
             println("Кнопка логаута не найдена")
         }
 
-        //Ожидание результата
         TimeUnit.SECONDS.sleep(5)
 
     }

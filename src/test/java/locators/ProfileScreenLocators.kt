@@ -4,7 +4,11 @@ import constructor.classes.LocatorsConstructor
 
 class ProfileScreenLocators {
 
-    val buttonProfileEdit = LocatorsConstructor(
+    val buttonSignIn = LocatorsConstructor(
+        androidId = "ru.sportmaster.app.handh.dev:id/buttonSignIn"
+    )
+
+    val buttonEditProfile = LocatorsConstructor(
         androidId = "ru.sportmaster.app.handh.dev:id/buttonEditProfile"
     )
 
