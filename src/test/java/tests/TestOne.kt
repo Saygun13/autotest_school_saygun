@@ -1,6 +1,7 @@
 package tests
 
 import constructor.classes.LocatorsTypesConstructor
+import constructor.classes.UserData
 import constructor.classes.locatorsTypes
 import utils.PlatformTouchAction
 import io.appium.java_client.touch.WaitOptions
@@ -32,7 +33,7 @@ class TestOne : TestMethods() {
         inputTextInField(
             locatorType = locatorsTypes.id,
             locator = AuthScreenLocators().editPhoneNumber.androidId,
-            inputText = "9999999998"
+            inputText = UserData().phoneNumber
         )
 
         //Запрос смс-кода
@@ -46,6 +47,7 @@ class TestOne : TestMethods() {
             locatorType = locatorsTypes.id,
             locator = AuthScreenLocators().editSmsCode.androidId,
             inputText = "1111"
+            inputText = UserData().smsCode
         )
 
         //Отказ в доступе к геолокации
