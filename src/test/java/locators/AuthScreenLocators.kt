@@ -4,6 +4,13 @@ import constructor.classes.LocatorsConstructor
 
 class AuthScreenLocators {
 
+    val closeAuthScreen = LocatorsConstructor(
+        androidXPath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.ImageButton",
+        iosAccessibilityId = "closeButton",
+        iosId = "15000000-0000-0000-0840-000000000000",
+        iosXPath = "//XCUIElementTypeButton[@name=\"closeButton\"]"
+    )
+
     val editPhoneNumber = LocatorsConstructor(
         androidId = "ru.sportmaster.app.handh.dev:id/editTextPhone",
         iosId = "4B000000-0000-0000-26D6-000000000000",

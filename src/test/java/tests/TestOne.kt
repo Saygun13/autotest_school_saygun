@@ -3,6 +3,7 @@ package tests
 import constructor.classes.UserData
 import constructor.classes.locatorsTypes
 import locators.*
+import main.GeneralScenariosForTests
 import main.TestMethods
 import org.testng.annotations.Test
 import java.util.concurrent.TimeUnit
@@ -12,12 +13,6 @@ class TestOne : TestMethods() {
 
     @Test
     fun testOne() {
-
-        //Соглашение на доступ к нотификации
-        clickToElement(
-            iosLocatorType = locatorsTypes.iosAccessibilityId,
-            iosLocator = PermissionDialogLocators().buttonAllow.iosAccessibilityId
-        )
 
         //Соглашение на трек аналитики
         clickToElement(
@@ -39,31 +34,8 @@ class TestOne : TestMethods() {
             println("Элемент не найден. Скипаем тест")
         }
 
-        //Ввод телефонного номера
-        inputTextInField(
-            androidLocatorType = locatorsTypes.androidId,
-            androidLocator = AuthScreenLocators().editPhoneNumber.androidId,
-            iosLocatorType = locatorsTypes.iosXPath,
-            iosLocator = AuthScreenLocators().editPhoneNumber.iosXPath,
-            inputText = UserData().phoneNumber
-        )
-
-        //Запрос смс-кода
-        clickToElement(
-            androidLocatorType = locatorsTypes.androidId,
-            androidLocator = AuthScreenLocators().buttonSendCode.androidId,
-            iosLocatorType = locatorsTypes.iosAccessibilityId,
-            iosLocator = AuthScreenLocators().buttonSendCode.iosAccessibilityId
-        )
-
-        //Ввод смс-кода
-        inputTextInField(
-            androidLocatorType = locatorsTypes.androidId,
-            androidLocator = AuthScreenLocators().editSmsCode.androidId,
-            iosLocatorType = locatorsTypes.iosAccessibilityId,
-            iosLocator = AuthScreenLocators().editSmsCode.iosAccessibilityId,
-            inputText = UserData().smsCode
-        )
+        //Прогон основных методов авторизации
+        GeneralScenariosForTests().basicAuth()
 
         //Отказ в доступе к геолокации
         clickToElement(
@@ -90,58 +62,14 @@ class TestOne : TestMethods() {
         )
 
         //Ожидание загрузки главного экрана
-        TimeUnit.SECONDS.sleep(5)
-
-        //Переход в раздел Профиль
-        clickToElement(
-            androidLocatorType = locatorsTypes.androidId,
-            androidLocator = TabbarLocators().buttonProfile.androidId,
+        elementIsDisplayed(
             iosLocatorType = locatorsTypes.iosAccessibilityId,
-            iosLocator = TabbarLocators().buttonProfile.iosAccessibilityId
+            iosLocator = MainScreenLocators().searchBar.iosAccessibilityId
         )
-
-        //Переход в редактирование профиля
-        clickToElement(
-            androidLocatorType = locatorsTypes.androidId,
-            androidLocator = ProfileScreenLocators().buttonEditProfile.androidId,
-            iosLocatorType = locatorsTypes.iosAccessibilityId,
-            iosLocator = ProfileScreenLocators().buttonEditProfile.iosAccessibilityId
-        )
-
-        //Очистка поля Имени
-        clearField(
-            androidLocatorType = locatorsTypes.androidId,
-            androidLocator = ProfileEditScreenLocators().editFirstName.androidId,
-            iosLocatorType = locatorsTypes.iosXPath,
-            iosLocator = ProfileEditScreenLocators().editFirstName.iosXPath
-
-        )
-
-        //Скролл экрана
-        TimeUnit.SECONDS.sleep(3)
-        swipeOnScreen(590, 1200, 590, 500)
 
         //Логаут
-        clickToElement(
-            androidLocatorType = locatorsTypes.androidId,
-            androidLocator = ProfileEditScreenLocators().buttonLogout.androidId,
-            iosLocatorType = locatorsTypes.iosAccessibilityId,
-            iosLocator = ProfileEditScreenLocators().buttonLogout.iosAccessibilityId
-        )
+        GeneralScenariosForTests().logout()
 
-
-        //Ожидание результата логаута. Наличие кнопки "Войти"
-        try {
-            elementIsDisplayed(
-                androidLocatorType = locatorsTypes.androidId,
-                androidLocator = ProfileScreenLocators().buttonSignIn.androidId,
-                iosLocatorType = locatorsTypes.iosAccessibilityId,
-                iosLocator = ProfileScreenLocators().buttonSignIn.iosAccessibilityId
-            )
-            println("Логаут прошел успешно")
-        } catch (e: org.openqa.selenium.NoSuchElementException) {
-            println("Кнопка логаута не найдена")
-        }
 
         TimeUnit.SECONDS.sleep(5)
 
